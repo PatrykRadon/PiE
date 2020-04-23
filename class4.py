@@ -6,14 +6,19 @@ from numbers import Number
 
 def aggregate_json(dictionary, aggregate_function, slice_scheme=None, non_target_keys=None, target_levels=None):
     """
+    Provided the scheme described below, the function will follow it going level by level into the dictionary,
+    returning the desired aggregated value (similar to "group by" query in SQL).
+
     :param dictionary: json-like dictionary.
     :param aggregate_function: function that will take a list of values and return a single value
-    :param slice_scheme: string representing the json levels of our target dictionary. If level is replaced
-     with ":", the function will be recurrently run on all its keys, returning their aggregated value.
-     If slice_scheme is give, the non_target_keys and target_levels will be deducted from it.
+    :param slice_scheme: string representing where the values to aggregate are.
+        It looks like: [key1][key2][key3] and so on. To aggregate the level, replace the key name with ':'.
+        If the key of the level is replaced by ':', the function will run recurrently for each key on the level where
+        it encountered that symbol, and when it finishes, it will aggregate all the results.
+        If slice_scheme is given, the non_target_keys and target_levels will be deducted from it.
     :param non_target_keys: *optional* levels where we want a single key-value from.
     :param target_levels: *optional* levels which we want to aggregate.
-    If both non_target_keys and target_levels are provided, the slice_scheme is no longer needed.
+        If both non_target_keys and target_levels are provided, the slice_scheme is no longer needed.
     :return: a single value, aggregated from dictionary, based on a slice_scheme.
     """
     non_target_keys = non_target_keys if non_target_keys is not None else []
