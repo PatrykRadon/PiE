@@ -43,7 +43,9 @@ class Gradebook:
         return self.attendance.loc[student_id][2:].sum()
 
 if __name__ == "__main__":
-    gb = Gradebook('best_school', '1a', [['jan','kowal'],['ban','bowal']])print(gb.gradebook)
+    gb = Gradebook('best_school', '1a', [['jan','kowal'],['ban','bowal']])
+    print(gb.gradebook)
+    
     gb.add_students(['ban','bebok'])
     print(gb.gradebook)
 
