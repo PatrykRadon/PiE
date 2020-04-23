@@ -43,29 +43,19 @@ class Gradebook:
         return self.attendance.loc[student_id][2:].sum()
 
 if __name__ == "__main__":
-    gb = Gradebook('best_school', '1a', [['jan','kowal'],['ban','bowal']])
-
-    print(gb.gradebook)
-
+    gb = Gradebook('best_school', '1a', [['jan','kowal'],['ban','bowal']])print(gb.gradebook)
     gb.add_students(['ban','bebok'])
-
     print(gb.gradebook)
 
     gb.add_grade_cat('kartkowka', class_name = 'maths')
-
     print(gb.gradebook)
 
     gb.set_students_grade(2, 'kartkowka', 'maths', 4.0)
     gb.set_students_grade([2, 1], 'sprawdzian', 'maths', [3.0, 2.0])
-
     print(gb.gradebook)
-
-
     print(gb.student_average_overall(2))
     print(gb.student_class_average(2,'maths'))
 
     gb.set_attendance('11-10-2010', [1,0,1])
-
     print(gb.attendance)
-
     print(gb.student_attendance_overall(2))
